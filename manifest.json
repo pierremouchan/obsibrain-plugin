@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-utils-plugin",
 	"name": "Obsidian Utils Plugin",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"minAppVersion": "0.15.0",
 	"description": "A collection of utilities to use within obsidian plugins.",
 	"author": "Pierre Mouchan",
