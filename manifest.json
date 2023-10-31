@@ -1,0 +1,11 @@
+{
+	"id": "obsidian-plugin-utils",
+	"name": "Obsidian Plugin Utils",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "A collection of utilities to use within obsidian plugins.",
+	"author": "pierremouchan",
+	"authorUrl": "https://github.com/pierremouchan",
+	"fundingUrl": "https://obsidian.md/pricing",
+	"isDesktopOnly": false
+}
