@@ -1,4 +1,4 @@
-import { Plugin } from "obsidian";
+import { Plugin, moment } from "obsidian";
 import * as chrono from "chrono-node";
 
 // Remember to rename these classes and interfaces!
@@ -23,6 +23,10 @@ export default class MyPlugin extends Plugin {
 	async saveSettings() {}
 
 	parseDate(dateString: string) {
-		return chrono.parseDate(dateString, new Date(), { forwardDate: true });
+		const date = chrono.parseDate(dateString, new Date(), { forwardDate: true });
+		return {
+			date: date,
+			formatted: moment(date).format("YYYY-MM-DD"),
+		}
 	}
 }
