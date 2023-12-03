@@ -1,0 +1,33 @@
+import type { IMacro } from "../../types/macros/IMacro";
+import type { App } from "obsidian";
+import { Modal } from "obsidian";
+import type IChoice from "../../types/choices/IChoice";
+import type QuickAdd from "../../main";
+export declare class MacroBuilder extends Modal {
+    macro: IMacro;
+    waitForClose: Promise<IMacro>;
+    private commands;
+    private javascriptFiles;
+    private readonly choices;
+    private commandListEl;
+    private svelteElements;
+    private resolvePromise;
+    private plugin;
+    constructor(app: App, plugin: QuickAdd, macro: IMacro, choices: IChoice[]);
+    onClose(): void;
+    protected display(): void;
+    protected addCenteredHeader(header: string): void;
+    private reload;
+    private addAddObsidianCommandSetting;
+    private addAddEditorCommandsSetting;
+    private addAddUserScriptSetting;
+    private addAddChoiceSetting;
+    private getObsidianCommands;
+    private getJavascriptFiles;
+    private addCommandList;
+    private addCommandBar;
+    addAIAssistantCommandButton(quickCommandContainer: HTMLDivElement): void;
+    private addAddWaitCommandButton;
+    private newChoiceButton;
+    private addCommandToMacro;
+}

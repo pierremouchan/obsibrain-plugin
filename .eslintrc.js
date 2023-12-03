@@ -1,0 +1,51 @@
+module.exports = {
+  root: true,
+  env: {
+    es6: true,
+    node: true,
+  },
+  parser: '@typescript-eslint/parser',
+  plugins: ['prettier', '@typescript-eslint', 'unused-imports'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+  ],
+  rules: {
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: ['interface', 'typeAlias'],
+        format: ['PascalCase'],
+        suffix: ['Type'],
+      },
+    ],
+    'no-prototype-builtins': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    'unused-imports/no-unused-imports-ts': 'error',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    'no-case-declarations': 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        printWidth: 120,
+        tabWidth: 2,
+        useTabs: false,
+        semi: false,
+        singleQuote: true,
+        quoteProps: 'consistent',
+        jsxSingleQuote: false,
+        trailingComma: 'all',
+        bracketSpacing: true,
+        jsxBracketSameLine: false,
+        arrowParens: 'always',
+        endOfLine: 'lf',
+      },
+    ],
+  },
+}

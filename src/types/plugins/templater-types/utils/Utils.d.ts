@@ -1,0 +1,10 @@
+import { App, TFile, TFolder } from "obsidian";
+export declare function delay(ms: number): Promise<void>;
+export declare function escape_RegExp(str: string): string;
+export declare function generate_command_regex(): RegExp;
+export declare function generate_dynamic_command_regex(): RegExp;
+export declare function resolve_tfolder(folder_str: string): TFolder;
+export declare function resolve_tfile(file_str: string): TFile;
+export declare function get_tfiles_from_folder(folder_str: string): Array<TFile>;
+export declare function arraymove<T>(arr: T[], fromIndex: number, toIndex: number): void;
+export declare function get_active_file(app: App): TFile | null;

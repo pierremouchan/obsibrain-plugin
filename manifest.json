@@ -1,11 +1,10 @@
 {
-	"id": "obsidian-utils-plugin",
-	"name": "Obsidian Utils Plugin",
+	"id": "obsibrain-plugin",
+	"name": "Obsibrain",
 	"version": "1.0.2",
 	"minAppVersion": "0.15.0",
-	"description": "A collection of utilities to use within obsidian plugins.",
+	"description": "Obsibrain plugin for Obsidian and the Obsibrain framework.",
 	"author": "Pierre Mouchan",
 	"authorUrl": "https://github.com/pierremouchan",
-	"fundingUrl": "https://obsidian.md/pricing",
 	"isDesktopOnly": false
 }

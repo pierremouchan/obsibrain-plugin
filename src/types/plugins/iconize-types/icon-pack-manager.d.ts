@@ -1,0 +1,51 @@
+import { Plugin } from 'obsidian';
+import IconFolderPlugin from './main';
+export interface Icon {
+    name: string;
+    prefix: string;
+    iconPackName: string;
+    filename: string;
+    svgContent: string;
+    svgViewbox: string;
+    svgElement: string;
+}
+export declare const getPath: () => string;
+export declare const setPath: (newPath: string) => void;
+export declare const getPreloadedIcons: () => Icon[];
+export declare const resetPreloadedIcons: () => void;
+export declare const setPreloadedIcons: (icons: Icon[]) => void;
+interface IconPack {
+    name: string;
+    prefix: string;
+    custom: boolean;
+    icons: Icon[];
+}
+export declare const setIconPacks: (newIconPacks: IconPack[]) => void;
+export declare const moveIconPackDirectories: (plugin: Plugin, from: string, to: string) => Promise<void>;
+export declare const createCustomIconPackDirectory: (plugin: Plugin, dir: string) => Promise<void>;
+export declare const deleteIconPack: (plugin: Plugin, dir: string) => Promise<void>;
+export declare const doesIconPackExist: (plugin: Plugin, iconPackName: string) => Promise<boolean>;
+export declare const deleteFile: (plugin: Plugin, filePath: string) => Promise<void>;
+export declare const getNormalizedName: (s: string) => string;
+export declare const createZipFile: (plugin: Plugin, filename: string, buffer: ArrayBuffer) => Promise<void>;
+export declare const createFile: (plugin: Plugin, iconPackName: string, filename: string, content: string, absoluteFilename?: string) => Promise<void>;
+export declare const createDefaultDirectory: (plugin: Plugin) => Promise<void>;
+export declare const getAllIconPacks: () => IconPack[];
+export declare const getIconPack: (name: string) => IconPack;
+export declare const getFilesInDirectory: (plugin: Plugin, dir: string) => Promise<string[]>;
+export declare const createIconPackPrefix: (iconPackName: string) => string;
+export declare const loadUsedIcons: (plugin: IconFolderPlugin, icons: string[]) => Promise<void>;
+export declare const listPath: (plugin: Plugin, listPath?: string) => Promise<import("obsidian").ListedFiles>;
+export declare const getIconPackNameByPrefix: (prefix: string) => string;
+export declare const nextIdentifier: (iconName: string) => number;
+export declare const loadIcon: (plugin: IconFolderPlugin, iconPacks: string[], iconName: string) => Promise<void>;
+export declare const initIconPacks: (plugin: Plugin) => Promise<void>;
+export declare const addIconToIconPack: (iconPackName: string, iconName: string, iconContent: string) => Icon | undefined;
+export declare const removeIconFromIconPackDirectory: (plugin: IconFolderPlugin, iconPackName: string, iconName: string) => Promise<void>;
+export declare const extractIconToIconPack: (plugin: Plugin, icon: Icon, iconContent: string) => Promise<void>;
+export declare const getAllLoadedIconNames: () => Icon[];
+export declare const registerIconPack: (name: string, arrayBuffer: ArrayBuffer) => Promise<void>;
+export declare const doesIconExists: (iconName: string) => boolean;
+export declare const getIconFromIconPack: (iconPackName: string, iconPrefix: string, iconName: string) => Icon;
+export declare const getSvgFromLoadedIcon: (iconPrefix: string, iconName: string) => string;
+export {};
