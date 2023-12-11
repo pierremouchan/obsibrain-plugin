@@ -77,6 +77,12 @@ const dvTasksUtils = {
         })
     )
   },
+
+  getSomedayMaybeTasks: function (tasks: TaskType[]) {
+    return tasks.filter((t) => {
+      return t.path.includes(CONSTANTS.SOMEDAY_FILE_PATH)
+    })
+  },
 }
 
 export default dvTasksUtils

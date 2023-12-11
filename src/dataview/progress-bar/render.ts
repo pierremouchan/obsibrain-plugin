@@ -18,10 +18,11 @@ const dvProgressBarRender = ({ dv, type }: DvProgressBarRenderArgsType) => {
   switch (type) {
     case 'linked-completed-projects':
       // get linked projects and comleted ones
-      const linkedProjects = getLinksByType(currentPage, CONSTANTS.PROJECTS_FOLDER)
+      const linkedProjectsLinks = getLinksByType(currentPage, CONSTANTS.PROJECTS_FOLDER)
+      const linkedProjects = linkedProjectsLinks.map((p) => dv.page(p))
       const completedProjects = filterByStatus(linkedProjects, 'completed')
       value = completedProjects.length
-      total = linkedProjects.length
+      total = linkedProjectsLinks.length
       break
 
     case 'completed-tasks':

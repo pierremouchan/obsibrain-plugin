@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabled": true,
+  "assignees": ["@pierremouchan"],
+  "extends": ["config:base", ":label(renovate)", ":separateMajorReleases"],
+  "schedule": ["after 10pm", "before 5am"],
+  "automergeSchedule": ["after 10pm", "before 5am"],
+  "stabilityDays": 3,
+  "prCreation": "immediate",
+  "semanticCommits": "enabled",
+  "ignoreDeps": ["node"],
+  "ignoreTests": true,
+  "packageRules": [
+  {
+    "description": "Automatically merge minor and patch-level updates",
+    "matchUpdateTypes": ["minor", "patch", "digest"],
+    "automerge": true,
+    "automergeType": "branch"
+ }
+  ]
+}

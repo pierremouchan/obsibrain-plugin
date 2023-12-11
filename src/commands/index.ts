@@ -1,6 +1,5 @@
 import openDaily from './open-daily'
 import newFleetingNote from './new-fleeting-note'
-import newTask from './new-task'
 import newResource from './new-resource'
 import newProject from './new-project'
 import newGoal from './new-goal'
@@ -11,6 +10,7 @@ import newMonthly from './new-monthly'
 import newWeekly from './new-weekly'
 import newDaily from './new-daily'
 import type ObsibrainUtilsPlugin from 'index'
+import newTask from '@/commands/new-task'
 
 function importCommands(plugin: ObsibrainUtilsPlugin) {
   // new daily note

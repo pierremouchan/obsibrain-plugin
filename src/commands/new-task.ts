@@ -2,13 +2,15 @@ import { CONSTANTS } from '@/utils/constants'
 import type { AppType } from '@/types'
 import toast from '@/utils/toast'
 import type { TFile } from 'obsidian'
+import { filterByFolder, getFullName } from '@/utils/files'
+import { parseDate } from '@/utils/dates'
 
 const newTask = async (app: AppType) => {
-  const { quickAddPlugin, utilsPlugin } = app.utils.plugins
+  const { quickAddPlugin } = app.utils.plugins
   const files = app.vault.getMarkdownFiles()
-  const projects = app.utils.files.filterByFolder(files, CONSTANTS.PROJECTS_FOLDER)
-  const areas = app.utils.files.filterByFolder(files, CONSTANTS.AREAS_FOLDER)
-  const resources = app.utils.files.filterByFolder(files, CONSTANTS.RESOURCES_FOLDER)
+  const projects = filterByFolder(files, CONSTANTS.PROJECTS_FOLDER)
+  const areas = filterByFolder(files, CONSTANTS.AREAS_FOLDER)
+  const resources = filterByFolder(files, CONSTANTS.RESOURCES_FOLDER)
 
   // Get someday-maybe file
   const somedayFile = (await app.vault.getAbstractFileByPath(`${CONSTANTS.RESOURCES_FOLDER}/Someday-Maybe.md`)) as TFile
@@ -21,7 +23,7 @@ const newTask = async (app: AppType) => {
   }
 
   // Ask the user to pick a file to store the task
-  const pickedFile = (await quickAddPlugin.suggester((f: any) => app.utils.files.getFullName(f) as any, [
+  const pickedFile = (await quickAddPlugin.suggester((f: any) => getFullName(f, app) as any, [
     ...projects,
     ...areas,
     ...resources,
@@ -43,17 +45,17 @@ const newTask = async (app: AppType) => {
   newTodo += `- [ ] ${todoTitle}`
 
   if (dueDate) {
-    const parsedDueDate = utilsPlugin.parseDate(dueDate.toLowerCase())
+    const parsedDueDate = parseDate(dueDate.toLowerCase())
     newTodo += ` [due::${parsedDueDate.formatted}]`
   }
 
   if (startDate) {
-    const parsedStartDate = utilsPlugin.parseDate(startDate.toLowerCase())
+    const parsedStartDate = parseDate(startDate.toLowerCase())
     newTodo += ` [start::${parsedStartDate.formatted}]`
   }
 
   if (scheduledDate) {
-    const parsedScheduledDate = utilsPlugin.parseDate(scheduledDate.toLowerCase())
+    const parsedScheduledDate = parseDate(scheduledDate.toLowerCase())
     newTodo += ` [scheduled::${parsedScheduledDate.formatted}]`
   }
 

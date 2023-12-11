@@ -1,5 +1,6 @@
 import { moment } from 'obsidian'
 import { CONSTANTS } from '@/utils/constants'
+import * as chrono from 'chrono-node'
 
 type FormatsObjectType = { [key in Exclude<moment.unitOfTime.StartOf, null>]: string }
 
@@ -17,6 +18,16 @@ export const DATES_FORMATS = {
   quarter: CONSTANTS.DEFAULT_QUARTER_DATE_FORMAT,
   year: CONSTANTS.DEFAULT_YEAR_DATE_FORMAT,
 } as FormatsObjectType
+
+export function parseDate(dateString: string) {
+  const date = chrono.parseDate(dateString, new Date(), {
+    forwardDate: true,
+  })
+  return {
+    date: date,
+    formatted: moment(date).format(CONSTANTS.DEFAULT_DATE_FORMAT),
+  }
+}
 
 export function getYear(date: string, format: string) {
   const m = moment(date, format)

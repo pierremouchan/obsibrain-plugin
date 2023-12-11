@@ -16,5 +16,6 @@ export function getLinksByType(page: any, type: string) {
 }
 
 export function filterByStatus(pages: any[], status: StatusType) {
+  console.log(pages.map((p) => p))
   return pages.filter((p) => p.status === status)
 }

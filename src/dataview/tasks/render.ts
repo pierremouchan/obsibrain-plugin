@@ -18,6 +18,7 @@ type DvTasksRenderArgsType = {
     | 'upcoming'
     | 'remaining'
     | 'unplanned'
+    | 'someday-maybe'
   scope: 'projects' | 'all'
   onDate: string
   forceFormat?: keyof typeof DATES_FORMATS // CONSTANTS DATE_FORMATS
@@ -76,6 +77,10 @@ const dvTasksRender = ({ dv, type, scope, onDate, forceFormat }: DvTasksRenderAr
 
     case 'unplanned':
       renderedTasks = dvTasksUtils.getUnplannedTasks(tasksUsed, onDateFormatted)
+      break
+
+    case 'someday-maybe':
+      renderedTasks = dvTasksUtils.getSomedayMaybeTasks(tasksUsed)
       break
 
     default:

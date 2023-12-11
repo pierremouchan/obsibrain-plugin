@@ -1,10 +1,8 @@
-import type FilesUtils from '@/utils/files'
 import type { App, Pos } from 'obsidian'
 import type { DataviewInlineApi } from 'obsidian-dataview/lib/api/inline-api'
 import type QuickAdd from './plugins/quickadd-types/main'
 import type { Templater } from './plugins/templater-types/core/Templater'
 import type IconFolderPlugin from './plugins/iconize-types/main'
-import type { CONSTANTS } from '@/utils/constants'
 import type { Link } from 'obsidian-dataview'
 
 export interface AppType extends App {
@@ -19,9 +17,6 @@ export interface AppType extends App {
       templaterPlugin: Templater
       all: any
     }
-    obsidian: App
-    constants: typeof CONSTANTS
-    files: FilesUtils
     templater: Record<any, any>
     dataview: Record<any, any>
   }

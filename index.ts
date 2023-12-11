@@ -1,11 +1,9 @@
-import * as chrono from 'chrono-node'
-import { Plugin, moment } from 'obsidian'
-import { CONSTANTS } from '@/utils/constants'
-import FilesUtils from '@/utils/files'
+import { Plugin } from 'obsidian'
 import type { AppType } from '@/types'
 import importCommands from '@/commands'
 import dataviewUtils from '@/dataview'
 import templaterUtils from '@/templater'
+import DateSuggest from '@/suggesters/date-suggest'
 
 interface ObsidianUtilsPluginSettingsType {
   settings: any
@@ -23,7 +21,11 @@ export default class ObsibrainUtilsPlugin extends Plugin {
     await this.loadSettings()
     await this.loadUtils()
 
+    // import all commands
     importCommands(this)
+
+    // register the date suggester when typing
+    this.registerEditorSuggest(new DateSuggest(this.app))
 
     console.log('Obsibrain plugin reloaded')
   }
@@ -31,11 +33,7 @@ export default class ObsibrainUtilsPlugin extends Plugin {
   onunload() {}
 
   private async loadUtils() {
-    const files = new FilesUtils(this.app)
-
     this.app.utils = {
-      obsidian: this.app,
-      constants: CONSTANTS,
       plugins: {
         dataViewPlugin: this.app.plugins.plugins['dataview']?.api,
         iconFolderPlugin: this.app.plugins.plugins['obsidian-icon-folder'],
@@ -44,7 +42,6 @@ export default class ObsibrainUtilsPlugin extends Plugin {
         templaterPlugin: this.app.plugins.plugins['templater-obsidian']?.templater,
         all: this.app.plugins.plugins,
       },
-      files,
       dataview: dataviewUtils,
       templater: templaterUtils,
     }
@@ -52,17 +49,5 @@ export default class ObsibrainUtilsPlugin extends Plugin {
 
   private async loadSettings() {
     this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData())
-  }
-
-  // Parse a date string into a date object and a formatted string
-  // Example: "tomorrow" => { date: Date, formatted: "2021-01-01" }
-  parseDate(dateString: string) {
-    const date = chrono.parseDate(dateString, new Date(), {
-      forwardDate: true,
-    })
-    return {
-      date: date,
-      formatted: moment(date).format(CONSTANTS.DEFAULT_DATE_FORMAT),
-    }
   }
 }
