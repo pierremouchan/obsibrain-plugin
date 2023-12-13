@@ -5,6 +5,7 @@ import dvLinksRender from './links/render'
 import dvNotesRender from './notes/render'
 import dvProjectsRender from './projects/render'
 import dvTasksRender from './tasks/render'
+import dvButtonRender from '@/dataview/button/render'
 
 const dataviewUtils = {
   tasks: {
@@ -27,6 +28,9 @@ const dataviewUtils = {
   },
   progressBar: {
     render: dvProgressBarRender,
+  },
+  button: {
+    render: dvButtonRender,
   },
 }
 

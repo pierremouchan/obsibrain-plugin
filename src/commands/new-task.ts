@@ -33,30 +33,41 @@ const newTask = async (app: AppType) => {
   let scheduledDate: string | undefined
   let startDate: string | undefined
 
-  if (pickedFile !== somedayFile) {
-    dueDate = await quickAddPlugin.inputPrompt('Due date', 'Tomorrow, in two days, next week, etc.')
-    scheduledDate = await quickAddPlugin.inputPrompt('Scheduled date', 'Today, tomorrow, in two days, etc.', dueDate)
-    startDate = await quickAddPlugin.inputPrompt('Start date', 'Today, tomorrow, in two days, etc.', scheduledDate)
-  }
-
   // Define the storing file and append the task with dates
   let newTodo = ''
 
   newTodo += `- [ ] ${todoTitle}`
 
-  if (dueDate) {
-    const parsedDueDate = parseDate(dueDate.toLowerCase())
-    newTodo += ` [due::${parsedDueDate.formatted}]`
-  }
+  if (pickedFile !== somedayFile) {
+    dueDate = await quickAddPlugin.inputPrompt('Due date', 'Tomorrow, in two days, next week, etc.')
+    if (dueDate) {
+      const parsedDueDate = parseDate(dueDate.toLowerCase())
+      if (!parsedDueDate.date) {
+        toast(`❌ Due date is invalid`)
+        throw new Error('Due date is invalid')
+      }
+      newTodo += ` [due::${parsedDueDate.formatted}]`
+    }
 
-  if (startDate) {
-    const parsedStartDate = parseDate(startDate.toLowerCase())
-    newTodo += ` [start::${parsedStartDate.formatted}]`
-  }
+    scheduledDate = await quickAddPlugin.inputPrompt('Scheduled date', 'Today, tomorrow, in two days, etc.', dueDate)
+    if (scheduledDate) {
+      const parsedScheduledDate = parseDate(scheduledDate.toLowerCase())
+      if (!parsedScheduledDate.date) {
+        toast(`❌ Scheduled date is invalid`)
+        throw new Error('Scheduled date is invalid')
+      }
+      newTodo += ` [scheduled::${parsedScheduledDate.formatted}]`
+    }
 
-  if (scheduledDate) {
-    const parsedScheduledDate = parseDate(scheduledDate.toLowerCase())
-    newTodo += ` [scheduled::${parsedScheduledDate.formatted}]`
+    startDate = await quickAddPlugin.inputPrompt('Start date', 'Today, tomorrow, in two days, etc.', scheduledDate)
+    if (startDate) {
+      const parsedStartDate = parseDate(startDate.toLowerCase())
+      if (!parsedStartDate.date) {
+        toast(`❌ Start date is invalid`)
+        throw new Error('Start date is invalid')
+      }
+      newTodo += ` [start::${parsedStartDate.formatted}]`
+    }
   }
 
   // Append the task to either picked file or active file content

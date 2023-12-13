@@ -27,7 +27,9 @@ const dvProgressBarView = (dv: DataviewInlineApi, value: number, total: number) 
     </div>
     `
 
-  return html
+  dv.el('div', '', { cls: 'dv-progress-bar-container' })
+  const container = dv.container.querySelector('.dv-progress-bar-container')!
+  container.innerHTML = html
 }
 
 export default dvProgressBarView

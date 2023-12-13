@@ -37,11 +37,8 @@ const dvProgressBarRender = ({ dv, type }: DvProgressBarRenderArgsType) => {
       throw new Error(`Unknown type: ${type}`)
   }
 
-  dv.el('div', '', { cls: 'dv-progress-bar-container' })
-  const container = dv.container.querySelector('.dv-progress-bar-container')!
-
-  // returning the rendered html
-  container.innerHTML = dvProgressBarView(dv, value, total)
+  //render the progress bar
+  dvProgressBarView(dv, value, total)
 }
 
 export default dvProgressBarRender
