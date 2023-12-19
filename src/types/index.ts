@@ -21,6 +21,7 @@ export interface AppType extends App {
     dataview: Record<any, any>
   }
   plugins: any
+  commands: any
 }
 
 type TaskBaseType = {

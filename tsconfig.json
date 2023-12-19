@@ -26,4 +26,7 @@
   "include": [
     "**/*.ts"
   ],
+  "exclude": [
+	"src/types/plugins/*"
+  ]
 }

@@ -97,6 +97,15 @@ function importCommands(plugin: ObsibrainUtilsPlugin) {
     callback: () => openDaily(plugin.app),
   })
 
+  plugin.addCommand({
+    id: 'edit-task',
+    name: '✍️ Edit Task',
+    callback: () => {
+      // call the obsidian tasks edit command
+      console.log(plugin.app.commands.commands['obsidian-tasks-plugin:edit-task'].checkCallback())
+    },
+  })
+
   //   const areasToMove = ['Design', 'Tattoos']
 
   //   plugin.addCommand({
