@@ -79,10 +79,6 @@ const dvTasksRender = ({ dv, type, scope, onDate, forceFormat }: DvTasksRenderAr
       renderedTasks = dvTasksUtils.getUnplannedTasks(tasksUsed, onDateFormatted)
       break
 
-    case 'someday-maybe':
-      renderedTasks = dvTasksUtils.getSomedayMaybeTasks(tasksUsed)
-      break
-
     default:
       throw new Error(`Unknown type: ${type}`)
   }

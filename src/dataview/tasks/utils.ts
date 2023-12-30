@@ -1,5 +1,4 @@
 import type { TaskType } from '@/types'
-import { CONSTANTS } from '@/utils/constants'
 import { getDateFormat, isBefore, isBetween, isSame, isSameOrBefore, isUpcoming } from '@/utils/dates'
 
 function filterOutCompletedTasks(tasks: TaskType[]) {
@@ -67,21 +66,11 @@ const dvTasksUtils = {
   getUnplannedTasks: function (tasks: TaskType[], onDate: string) {
     return (
       filterOutCompletedTasks(tasks)
-        // remove someday tasks
-        .filter((t) => {
-          return !t.path.includes(CONSTANTS.SOMEDAY_FILE_PATH)
-        })
         // show task that does not have a due date
         .filter((t) => {
           return !t.due || !t.scheduled
         })
     )
-  },
-
-  getSomedayMaybeTasks: function (tasks: TaskType[]) {
-    return tasks.filter((t) => {
-      return t.path.includes(CONSTANTS.SOMEDAY_FILE_PATH)
-    })
   },
 }
 
