@@ -15,8 +15,8 @@ const newMonthly = async (app: AppType) => {
   }
 
   // checking if the notes exist
-  const thisMonthNoteExist = await app.vault.exists(`${CONSTANTS.MONTHLY_FOLDER}/${thisMonthDate}.md`)
-  const lastMonthNoteExist = await app.vault.exists(`${CONSTANTS.MONTHLY_FOLDER}/${lastMonthDate}.md`)
+  const thisMonthNoteExist = await app.vault.adapter.exists(`${CONSTANTS.MONTHLY_FOLDER}/${thisMonthDate}.md`)
+  const lastMonthNoteExist = await app.vault.adapter.exists(`${CONSTANTS.MONTHLY_FOLDER}/${lastMonthDate}.md`)
 
   // get the monthly note template
   const monthlyNoteTemplate = await app.vault.getAbstractFileByPath(CONSTANTS.TEMPLATES.MONTHLY)
@@ -25,8 +25,8 @@ const newMonthly = async (app: AppType) => {
   let choosenDate: string | undefined
 
   // this month condition
-  // we can create a monthly review only if we are in the last days of the month (last 3-4 days)
-  const thisMonthCreationCondition = [28, 29, 30, 31].includes(moment().date())
+  // we can create a monthly review only if we are in the last days of the month (last 5-6 days)
+  const thisMonthCreationCondition = [25, 26, 27, 28, 29, 30, 31].includes(moment().date())
 
   // if last month note doesn't exist, suggest the user to choose which week to create
   if (!lastMonthNoteExist) {

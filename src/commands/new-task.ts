@@ -4,6 +4,7 @@ import toast from '@/utils/toast'
 import type { TFile } from 'obsidian'
 import { filterByFolder, getFullName } from '@/utils/files'
 import { parseDate } from '@/utils/dates'
+import { moment } from 'obsidian'
 
 const newTask = async (app: AppType) => {
   const { quickAddPlugin } = app.utils.plugins
@@ -36,7 +37,8 @@ const newTask = async (app: AppType) => {
   // Define the storing file and append the task with dates
   let newTodo = ''
 
-  newTodo += `- [ ] ${todoTitle}`
+  // create the default task with created date
+  newTodo += `- [ ] ${todoTitle} [created::${moment().format(CONSTANTS.DEFAULT_DATE_FORMAT)}]`
 
   if (pickedFile !== somedayFile) {
     dueDate = await quickAddPlugin.inputPrompt('Due date', 'Tomorrow, in two days, next week, etc.')

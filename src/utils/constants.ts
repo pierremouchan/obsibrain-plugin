@@ -17,7 +17,6 @@ export const CONSTANTS = {
   RESOURCES_FOLDER: '3-resources',
   ARCHIVES_FOLDER: '4-archives',
   NOTES_FOLDER: '5-notes',
-  SOMEDAY_FILE_PATH: 'Someday-Maybe.md',
   TEMPLATES: {
     DAILY: 'templates/plan/Daily.md',
     WEEKLY: 'templates/plan/Weekly.md',

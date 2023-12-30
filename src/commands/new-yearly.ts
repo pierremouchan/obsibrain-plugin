@@ -6,9 +6,17 @@ import { moment } from 'obsidian'
 
 const newYearly = async (app: AppType) => {
   const thisYearDate = moment().format(CONSTANTS.DEFAULT_YEAR_DATE_FORMAT)
+  const lastYearDate = moment().subtract(1, 'years').format(CONSTANTS.DEFAULT_YEAR_DATE_FORMAT)
 
   // checking if the note exists
-  const thisYearNoteExist = await app.vault.exists(`${CONSTANTS.YEARLY_FOLDER}/${thisYearDate}.md`)
+  const thisYearNoteExist = await app.vault.adapter.exists(`${CONSTANTS.YEARLY_FOLDER}/${thisYearDate}.md`)
+  const lastYearNoteExist = await app.vault.adapter.exists(`${CONSTANTS.YEARLY_FOLDER}/${lastYearDate}.md`)
+
+  // mapping them to an object
+  const lastYears = {
+    'This year': thisYearDate,
+    'Last year': lastYearDate,
+  }
 
   // get the yearly note template
   const yearlyNoteTemplate = await app.vault.getAbstractFileByPath(CONSTANTS.TEMPLATES.YEARLY)
@@ -23,25 +31,44 @@ const newYearly = async (app: AppType) => {
 
     // Find the end of the current year and start of next year
     const endOfYear = today.clone().endOf('year')
-    const startOfNextYear = today.clone().startOf('year').add(1, 'years')
 
-    // Calculate difference in days between today and end/start of years
-    const diffToEndOfYearDays = endOfYear.diff(today, 'days') + 1 // add one because diff might return -1 on same day
-    const diffToStartOfNextYearDays = startOfNextYear.diff(today, 'days')
+    // Calculate difference in days between today and end of quarter
+    const diffDays = endOfYear.diff(today, 'days') + 1 // add one because diff might return -1 on same day
 
-    // Check if today's date is within last few days of this year or first few days of next year
-    return (
-      (diffToEndOfYearDays >= -3 && diffToEndOfYearDays <= 0) ||
-      (diffToStartOfNextYearDays >= -3 && diffToStartOfNextYearDays <= 0)
-    )
+    // Check if today's date is within last few days of the yeark
+    return diffDays >= 1 && diffDays <= 4
   }
+
   const thisYearCreationCondition = isLastDaysOrFirstDaysOfYear()
 
-  if (!thisYearNoteExist || !thisYearCreationCondition) {
-    chosenDate = thisYearDate
+  if (!lastYearNoteExist || !thisYearCreationCondition) {
+    const choices: string[] = []
+    if (!thisYearNoteExist && thisYearCreationCondition) {
+      choices.push(thisYearDate)
+    }
+    if (!lastYearNoteExist) {
+      choices.push(lastYearDate)
+    }
+
+    if (choices.length === 0) {
+      toast(
+        `❌ Yearly review can be created only on last few days of the year or first few days of next year. (15 days before and after)`,
+      )
+      return
+    }
+
+    chosenDate = await app.utils.plugins.quickAddPlugin.suggester(
+      //@ts-ignore
+      (date: string) => Object.keys(lastYears).find((key) => lastYears[key] === date),
+      choices,
+    )
   } else {
-    toast(`❌ This year's note already exists.`)
-    return
+    if (thisYearNoteExist) {
+      toast(`❌ This year's note already exists.`)
+      return
+    }
+
+    chosenDate = thisYearDate
   }
 
   if (!chosenDate) {

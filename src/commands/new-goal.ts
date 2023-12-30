@@ -17,7 +17,7 @@ const newGoal = async (app: AppType) => {
   }
 
   // Check if the note already exists
-  const goalNoteExist = await app.vault.exists(`${CONSTANTS.GOALS_FOLDER}/${goalName}.md`)
+  const goalNoteExist = await app.vault.adapter.exists(`${CONSTANTS.GOALS_FOLDER}/${goalName}.md`)
 
   if (goalNoteExist) {
     toast(`❌ Goal already exists.`)

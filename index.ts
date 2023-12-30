@@ -26,8 +26,6 @@ export default class ObsibrainUtilsPlugin extends Plugin {
 
     // register the date suggester when typing
     this.registerEditorSuggest(new DateSuggest(this.app))
-
-    console.log('Obsibrain plugin reloaded')
   }
 
   onunload() {}

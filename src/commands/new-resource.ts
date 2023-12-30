@@ -17,7 +17,7 @@ const newResource = async (app: AppType) => {
   }
 
   // Check if the note already exists
-  const resourceNoteExist = await app.vault.exists(`${CONSTANTS.RESOURCES_FOLDER}/${resourceName}.md`)
+  const resourceNoteExist = await app.vault.adapter.exists(`${CONSTANTS.RESOURCES_FOLDER}/${resourceName}.md`)
 
   if (resourceNoteExist) {
     toast(`❌ Resource already exists.`)

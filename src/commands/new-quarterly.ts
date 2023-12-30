@@ -15,8 +15,8 @@ const newQuarterly = async (app: AppType) => {
   }
 
   // checking if the notes exist
-  const thisQuarterNoteExist = await app.vault.exists(`${CONSTANTS.QUARTERLY_FOLDER}/${thisQuarterDate}.md`)
-  const lastQuarterNoteExist = await app.vault.exists(`${CONSTANTS.QUARTERLY_FOLDER}/${lastQuarterDate}.md`)
+  const thisQuarterNoteExist = await app.vault.adapter.exists(`${CONSTANTS.QUARTERLY_FOLDER}/${thisQuarterDate}.md`)
+  const lastQuarterNoteExist = await app.vault.adapter.exists(`${CONSTANTS.QUARTERLY_FOLDER}/${lastQuarterDate}.md`)
 
   // get the quarterly note template
   const quarterlyNoteTemplate = await app.vault.getAbstractFileByPath(CONSTANTS.TEMPLATES.QUARTERLY)
@@ -35,8 +35,8 @@ const newQuarterly = async (app: AppType) => {
     // Calculate difference in days between today and end of quarter
     const diffDays = endOfQuarter.diff(today, 'days') + 1 // add one because diff might return -1 on same day
 
-    // Check if today's date is within last few days of the quarter
-    return diffDays >= 1 && diffDays <= 4
+    // Check if today's date is within last few days of the quarter (-10 days and +10 days)
+    return diffDays >= -10 && diffDays <= 10
   }
 
   const thisQuarterCreationCondition = isLastDaysOfQuarter()
@@ -56,7 +56,7 @@ const newQuarterly = async (app: AppType) => {
       choices,
     )
   } else {
-    if (thisQuarterNoteExist && !thisQuarterCreationCondition) {
+    if (!thisQuarterCreationCondition) {
       toast(`❌ Quarterly review can be created only on last few days of the quarter.`)
       return
     }

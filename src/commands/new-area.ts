@@ -14,7 +14,7 @@ const newArea = async (app: AppType) => {
   }
 
   // Check if the note already exists
-  const areaNoteExist = await app.vault.exists(`${CONSTANTS.AREAS_FOLDER}/${areaName}.md`)
+  const areaNoteExist = await app.vault.adapter.exists(`${CONSTANTS.AREAS_FOLDER}/${areaName}.md`)
 
   if (areaNoteExist) {
     toast(`❌ Area already exists.`)

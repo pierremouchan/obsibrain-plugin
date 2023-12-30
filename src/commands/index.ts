@@ -102,7 +102,7 @@ function importCommands(plugin: ObsibrainUtilsPlugin) {
     name: '✍️ Edit Task',
     callback: () => {
       // call the obsidian tasks edit command
-      console.log(plugin.app.commands.commands['obsidian-tasks-plugin:edit-task'].checkCallback())
+      plugin.app.commands.commands['obsidian-tasks-plugin:edit-task'].checkCallback()
     },
   })
 

@@ -17,9 +17,11 @@ const newDaily = async (app: AppType) => {
   }
 
   // checking if the notes exist
-  const todayNoteExist = await app.vault.exists(`${CONSTANTS.DAILY_FOLDER}/${todayDate}.md`)
-  const yesterdayNoteExist = await app.vault.exists(`${CONSTANTS.DAILY_FOLDER}/${yesterdayDate}.md`)
-  const dayBeforeYesterdayNoteExist = await app.vault.exists(`${CONSTANTS.DAILY_FOLDER}/${dayBeforeYesterdayDate}.md`)
+  const todayNoteExist = await app.vault.adapter.exists(`${CONSTANTS.DAILY_FOLDER}/${todayDate}.md`)
+  const yesterdayNoteExist = await app.vault.adapter.exists(`${CONSTANTS.DAILY_FOLDER}/${yesterdayDate}.md`)
+  const dayBeforeYesterdayNoteExist = await app.vault.adapter.exists(
+    `${CONSTANTS.DAILY_FOLDER}/${dayBeforeYesterdayDate}.md`,
+  )
 
   // get the daily note template
   const dailyNoteTemplate = await app.vault.getAbstractFileByPath(CONSTANTS.TEMPLATES.DAILY)

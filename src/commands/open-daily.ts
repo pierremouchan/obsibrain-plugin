@@ -12,7 +12,7 @@ const openDaily = async (app: AppType) => {
 
   // Check if the note already exists
   const todayNotePath = `${CONSTANTS.DAILY_FOLDER}/${todayDate}.md`
-  const todayNoteExist = await app.vault.exists(todayNotePath)
+  const todayNoteExist = await app.vault.adapter.exists(todayNotePath)
 
   if (todayNoteExist) {
     // Open existing daily note

@@ -15,8 +15,8 @@ const newWeekly = async (app: AppType) => {
   }
 
   // checking if the notes exist
-  const thisWeekNoteExist = await app.vault.exists(`${CONSTANTS.WEEKLY_FOLDER}/${thisWeekDate}.md`)
-  const lastWeekNoteExist = await app.vault.exists(`${CONSTANTS.WEEKLY_FOLDER}/${lastWeekDate}.md`)
+  const thisWeekNoteExist = await app.vault.adapter.exists(`${CONSTANTS.WEEKLY_FOLDER}/${thisWeekDate}.md`)
+  const lastWeekNoteExist = await app.vault.adapter.exists(`${CONSTANTS.WEEKLY_FOLDER}/${lastWeekDate}.md`)
 
   // get the weekly note template
   const weeklyNoteTemplate = await app.vault.getAbstractFileByPath(CONSTANTS.TEMPLATES.WEEKLY)
@@ -42,7 +42,7 @@ const newWeekly = async (app: AppType) => {
       choices,
     )
   } else {
-    if (thisWeekNoteExist || !thisWeekCreationCondition) {
+    if (!thisWeekCreationCondition) {
       toast(`❌ Weekly review can be created only on Saturday or Sunday (or following week).`)
       return
     }

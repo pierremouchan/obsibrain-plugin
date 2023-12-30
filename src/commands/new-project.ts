@@ -7,14 +7,17 @@ const newProject = async (app: AppType) => {
   const { quickAddPlugin, templaterPlugin } = app.utils.plugins
 
   // Ask the user for the project name
-  const projectName = await quickAddPlugin.inputPrompt('Project name', 'Write a book, Learn to code, etc.')
+  const projectName = await quickAddPlugin.inputPrompt(
+    'Project name',
+    'Content Strategy Development, Sport tracking system, etc.',
+  )
 
   if (!projectName) {
     throw new Error('Project name is required')
   }
 
   // Check if the note already exists
-  const projectNoteExist = await app.vault.exists(`${CONSTANTS.PROJECTS_FOLDER}/${projectName}.md`)
+  const projectNoteExist = await app.vault.adapter.exists(`${CONSTANTS.PROJECTS_FOLDER}/${projectName}.md`)
 
   if (projectNoteExist) {
     toast(`❌ Project already exists.`)
