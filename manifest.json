@@ -1,7 +1,7 @@
 {
   "id": "obsibrain-plugin",
   "name": "Obsibrain",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "minAppVersion": "1.7.4",
   "description": "Official plugin for the Obsibrain template.",
   "author": "Pierre Mouchan",
