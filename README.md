@@ -12,7 +12,7 @@ For full Obsibrain documentation, changelog, and FAQs, please visit the [Obsibra
 
 ## Closed-Source Plugin
 
-The Obsibrain plugin is currently closed-source, as it contains proprietary templates and scripts that power the Obsibrain experience. We are in discussions with the Obsidian developers to let one of their developers check the source code of the plugin.
+The Obsibrain plugin is currently closed-source, as it contains proprietary templates and scripts that power the Obsibrain experience.
 
 ## Availability
 
@@ -21,4 +21,3 @@ The Obsibrain plugin is not yet listed on the official Obsidian community plugin
 ## Contact
 
 If you have any questions or feedback, feel free to reach out: [support@obsibrain.com](mailto:support@obsibrain.com)
-
